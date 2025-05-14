@@ -85,8 +85,8 @@
     <Compile Include="Assets\Flooded_Grounds\PostProcessing\Editor\PostProcessingBehaviourEditor.cs" />
     <Compile Include="Assets\Flooded_Grounds\PostProcessing\Editor\Models\FogModelEditor.cs" />
     <Compile Include="Assets\Flooded_Grounds\PostProcessing\Editor\Models\MotionBlurModelEditor.cs" />
-    <Compile Include="Assets\Flooded_Grounds\PostProcessing\Editor\PostProcessingFactory.cs" />
     <Compile Include="Assets\Flooded_Grounds\PostProcessing\Editor\Models\ColorGradingModelEditor.cs" />
+    <Compile Include="Assets\Flooded_Grounds\PostProcessing\Editor\PostProcessingFactory.cs" />
     <Compile Include="Assets\Flooded_Grounds\PostProcessing\Editor\PostProcessingInspector.cs" />
     <Compile Include="Assets\Flooded_Grounds\PostProcessing\Editor\PostProcessingMonitor.cs" />
     <Compile Include="Assets\Flooded_Grounds\PostProcessing\Editor\Models\BloomModelEditor.cs" />
