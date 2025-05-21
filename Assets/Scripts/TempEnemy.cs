@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.AI;
-using UnityEditor.UI;
+
 public class TempEnemy : MonoBehaviour
 {
     private PlayerHealth player;
@@ -24,9 +24,10 @@ public class TempEnemy : MonoBehaviour
         {
             agent.SetDestination(target.position);
             animator.SetFloat("Speed", agent.velocity.magnitude);
+            animator.SetTrigger("Idle");
         }
 
-        if ((pos - playerPos).magnitude <= .5)
+        if ((pos - playerPos).magnitude <= .7)
         {
             //player.TakeDamage(35);
             target.GetComponent<PlayerHealth>().TakeDamage(35);
