@@ -8,4 +8,19 @@ public class MySceneManager : MonoBehaviour
         Time.timeScale = 0f;
         SceneManager.LoadScene("DeathScreen");
     }
+
+    public static void LoadGame()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("GameScene");
+    }
+
+    public static void QuitGame()
+    {
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
+    }
 }
