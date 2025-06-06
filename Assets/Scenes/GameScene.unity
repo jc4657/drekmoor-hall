@@ -11460,7 +11460,7 @@ GameObject:
   - component: {fileID: 1343651761}
   - component: {fileID: 1343651760}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Crosshair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12070,7 +12070,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7c3f84202d0d164e90b4dee189c44e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 100
+  mouseSensitivity: 10
   playerCamera: {fileID: 963194227}
 --- !u!114 &1410208512
 MonoBehaviour:
@@ -16600,7 +16600,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 156820, guid: e268c3025a2a0864f9c404b68a8cedcd, type: 3}
       propertyPath: m_Name
-      value: Villa1_Floor_Mid_A_4x (1)
+      value: StorageFloor
       objectReference: {fileID: 0}
     - target: {fileID: 454854, guid: e268c3025a2a0864f9c404b68a8cedcd, type: 3}
       propertyPath: m_LocalPosition.x
