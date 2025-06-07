@@ -14,31 +14,50 @@ public class GameManager : MonoBehaviour
     public GameObject bookOne;
     public Image image;
 
-    public GameObject hallucination;
-
+    public GameObject hallucinationOne;
+    public GameObject hallucinationTwo;
+    private int choice;
     private float timer;
+    private GameObject hall;
     void Start()
     {
         timer = 1500.0f;
         image = GetComponent<Image>();
+        choice = Random.Range(1, 3);
+        hall = null;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        
         if (timer > 0)
         {
             timer--;
         }
-        else if (timer <= 0 && timer > -10)
+        else if (timer <= 0 && timer > -30)
         {
             timer--;
-            hallucination.SetActive(true);
+
+            if (choice <= 1)
+            {
+                hall = hallucinationOne;
+            }
+            else
+            {
+                hall = hallucinationTwo;
+            }
+            hall.SetActive(true);
         }
         else
         {
-            timer = Random.Range(1500.0f, 30000.0f);
-            hallucination.SetActive(false);
+            Debug.Log("We're here");
+            hall.SetActive(false);
+            hallucinationOne.SetActive(false);
+            hallucinationTwo.SetActive(false);
+            choice = Random.Range(1, 3);
+            timer = Random.Range(1500.0f, 3000.0f);
         }
         
         Vector3 pos = enemy.transform.position;
