@@ -25,6 +25,12 @@ public class PlayerMovement : MonoBehaviour
 
     public static PlayerMovement Instance;
 
+    [Header("Audio")]
+    public AudioClip[] footsteps;
+    public AudioSource source;
+    public float footstepDelay = 0.5f;
+    private float footstepTimer;
+
     void Awake()
     {
         Instance = this;
@@ -63,6 +69,22 @@ public class PlayerMovement : MonoBehaviour
         {
             rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             jumpPressed = false;
+        }
+
+        if ((moveInput.y > 0 || moveInput.x > 0) && IsGrounded())
+        {
+            footstepTimer -= Time.deltaTime;
+            if (footstepTimer <= 0f)
+            {
+                int i = Random.Range(0, footsteps.Length);
+                source.clip = footsteps[i];
+                source.Play();
+                footstepTimer = footstepDelay;
+            }
+        }
+        else
+        {
+            footstepTimer = 0f;
         }
     }
 
