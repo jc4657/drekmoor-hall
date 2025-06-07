@@ -13,14 +13,34 @@ public class GameManager : MonoBehaviour
 
     public GameObject bookOne;
     public Image image;
+
+    public GameObject hallucination;
+
+    private float timer;
     void Start()
     {
+        timer = 1500.0f;
         image = GetComponent<Image>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (timer > 0)
+        {
+            timer--;
+        }
+        else if (timer <= 0 && timer > -10)
+        {
+            timer--;
+            hallucination.SetActive(true);
+        }
+        else
+        {
+            timer = Random.Range(1500.0f, 30000.0f);
+            hallucination.SetActive(false);
+        }
+        
         Vector3 pos = enemy.transform.position;
         Vector3 playerPos = player.transform.position;
         Vector3 bookOnePos = bookOne.transform.position;

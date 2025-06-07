@@ -85,7 +85,7 @@ public class TempEnemy : MonoBehaviour
         //if ((pos - playerPos).magnitude <= 15)
         if (((view <= -90 || view >= 90) && range.magnitude <= 5) || ((view <= -45 || view >= 45) && !Physics.Raycast(ray, range.magnitude - 1)) || isReading.activeInHierarchy) //((view <= -90 || view >= 90) && range.magnitude <= 15) || 
         {
-            timer = 200.0f;
+            timer = 1200.0f;
             seen = true;
         }
         else if ((pos - playerPos).magnitude > 15 && (pos - playerPos).magnitude <= 70)
