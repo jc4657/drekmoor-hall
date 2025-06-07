@@ -83,9 +83,9 @@ public class TempEnemy : MonoBehaviour
         Vector3 range = pos - playerPos;
         float view = Vector3.Angle(range, transform.forward);
         //if ((pos - playerPos).magnitude <= 15)
-        if (((view <= -90 || view >= 90) && range.magnitude <= 15) || ((view <= -45 || view >= 45) && range.magnitude <= 40) || isReading.activeInHierarchy) //
+        if (((view <= -90 || view >= 90) && range.magnitude <= 5) || ((view <= -45 || view >= 45) && !Physics.Raycast(ray, range.magnitude - 1)) || isReading.activeInHierarchy) //((view <= -90 || view >= 90) && range.magnitude <= 15) || 
         {
-            timer = 60.0f;
+            timer = 200.0f;
             seen = true;
         }
         else if ((pos - playerPos).magnitude > 15 && (pos - playerPos).magnitude <= 70)
