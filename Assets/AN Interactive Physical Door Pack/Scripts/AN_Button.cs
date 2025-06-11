@@ -1,4 +1,8 @@
 ﻿using UnityEngine;
+using Microsoft.Unity.VisualStudio.Editor;
+using Unity.VisualScripting;
+using UnityEngine.InputSystem;
+using System.Collections;
 
 public class AN_Button : MonoBehaviour
 {
@@ -7,7 +11,7 @@ public class AN_Button : MonoBehaviour
     [Tooltip("SelfRotation speed of valve")]
     public float ValveSpeed = 10f;
     [Tooltip("If it isn't valve, it can be lever or button (animated)")]
-    public bool isLever = false;
+    public bool isLever = true;
     [Tooltip("If it is false door can't be used")]
     public bool Locked = false;
     [Tooltip("The door for remote control")]
@@ -37,63 +41,70 @@ public class AN_Button : MonoBehaviour
     float distance;
     float angleView;
     Vector3 direction;
-
+    public bool upDown;
+    public GameObject player;
     void Start()
     {
         anim = GetComponent<Animator>();
         startYPosition = RampObject.position.y;
         startQuat = transform.rotation;
         rampQuat = RampObject.rotation;
+        upDown = false;
     }
 
     void Update()
     {
         if (!Locked)
         {
-            if (Input.GetKeyDown(KeyCode.E) && !isValve && DoorObject != null && DoorObject.Remote && NearView()) // 1.lever and 2.button
+            if ((player.transform.position - transform.position).magnitude <= 3)
             {
-                DoorObject.Action(); // void in door script to open/close
-                if (isLever) // animations
+                if (Keyboard.current.eKey.wasPressedThisFrame && !isValve) // 1.lever and 2.button DoorObject != null && DoorObject.Remote && NearView()
                 {
-                    if (DoorObject.isOpened) anim.SetBool("LeverUp", true);
-                    else anim.SetBool("LeverUp", false);
-                }
-                else anim.SetTrigger("ButtonPress");
-            }
-            else if (isValve && RampObject != null) // 3.valve
-            {
-                // changing value in script
-                if (Input.GetKey(KeyCode.E) && NearView())
-                {
-                    if (valveBool)
+                    //DoorObject.Action(); // void in door script to open/close
+                    if (isLever) // animations
                     {
-                        if (!isOpened && CanOpen && current < max) current += speed * Time.deltaTime;
-                        if (isOpened && CanClose && current > min) current -= speed * Time.deltaTime;
+                        upDown = !upDown;
+                        anim.SetBool("LeverUp", upDown);
+                        //if (DoorObject.isOpened) anim.SetBool("LeverUp", true);
+                        //else anim.SetBool("LeverUp", false);
+                    }
+                    else anim.SetTrigger("ButtonPress");
+                }
+                else if (isValve && RampObject != null) // 3.valve
+                {
+                    // changing value in script
+                    if (Input.GetKey(KeyCode.E) && NearView())
+                    {
+                        if (valveBool)
+                        {
+                            if (!isOpened && CanOpen && current < max) current += speed * Time.deltaTime;
+                            if (isOpened && CanClose && current > min) current -= speed * Time.deltaTime;
 
-                        if (current >= max)
-                        {
-                            isOpened = true;
-                            valveBool = false;
+                            if (current >= max)
+                            {
+                                isOpened = true;
+                                valveBool = false;
+                            }
+                            else if (current <= min)
+                            {
+                                isOpened = false;
+                                valveBool = false;
+                            }
                         }
-                        else if (current <= min)
-                        {
-                            isOpened = false;
-                            valveBool = false;
-                        }
+
+                    }
+                    else
+                    {
+                        if (!isOpened && current > min) current -= speed * Time.deltaTime;
+                        if (isOpened && current < max) current += speed * Time.deltaTime;
+                        valveBool = true;
                     }
 
+                    // using value on object
+                    transform.rotation = startQuat * Quaternion.Euler(0f, 0f, current * ValveSpeed);
+                    if (xRotation) RampObject.rotation = rampQuat * Quaternion.Euler(current, 0f, 0f); // I have a doubt in working correctly
+                    else if (yPosition) RampObject.position = new Vector3(RampObject.position.x, startYPosition + current, RampObject.position.z);
                 }
-                else
-                {
-                    if (!isOpened && current > min) current -= speed * Time.deltaTime;
-                    if (isOpened && current < max) current += speed * Time.deltaTime;
-                    valveBool = true;
-                }
-
-                // using value on object
-                transform.rotation = startQuat * Quaternion.Euler(0f, 0f, current * ValveSpeed);
-                if (xRotation) RampObject.rotation = rampQuat * Quaternion.Euler(current, 0f, 0f); // I have a doubt in working correctly
-                else if (yPosition) RampObject.position = new Vector3(RampObject.position.x, startYPosition + current, RampObject.position.z);
             }
         }
     }
@@ -105,5 +116,10 @@ public class AN_Button : MonoBehaviour
         angleView = Vector3.Angle(Camera.main.transform.forward, direction);
         if (angleView < 45f && distance < 2f) return true;
         else return false;
+    }
+
+    public bool GetPosition()
+    {
+        return upDown;
     }
 }

@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
             hallucinationOne.SetActive(false);
             hallucinationTwo.SetActive(false);
             choice = Random.Range(1, 3);
-            timer = Random.Range(1500.0f, 3000.0f);
+            timer = Random.Range(1500.0f, 12000.0f);
         }
         
         Vector3 pos = enemy.transform.position;
