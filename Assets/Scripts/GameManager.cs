@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject dangerUI;
 
     public GameObject bookOne;
+    public GameObject bookTwo;
     public Image image;
 
     public GameObject hallucinationOne;
@@ -31,7 +32,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
-        
+
         if (timer > 0)
         {
             timer--;
@@ -59,10 +60,11 @@ public class GameManager : MonoBehaviour
             choice = Random.Range(1, 3);
             timer = Random.Range(1500.0f, 12000.0f);
         }
-        
+
         Vector3 pos = enemy.transform.position;
         Vector3 playerPos = player.transform.position;
         Vector3 bookOnePos = bookOne.transform.position;
+        Vector3 bookTwoPos = bookTwo.transform.position;
         if ((pos - playerPos).magnitude <= 10)
         {
             dangerUI.SetActive(true);
@@ -72,7 +74,7 @@ public class GameManager : MonoBehaviour
             dangerUI.SetActive(false);
         }
 
-        if ((playerPos - bookOnePos).magnitude <= 5) 
+        if ((playerPos - bookOnePos).magnitude <= 5)
         {
             Debug.Log("We reach here");
             if (Keyboard.current.zKey.wasPressedThisFrame)
@@ -80,6 +82,17 @@ public class GameManager : MonoBehaviour
                 Destroy(bookOne);
                 Debug.Log("This is working");
                 player.GetComponent<Reading>().setBookOneTrue();
+            }
+
+        }
+        if ((playerPos - bookTwoPos).magnitude <= 5) 
+        {
+            Debug.Log("We reach here");
+            if (Keyboard.current.zKey.wasPressedThisFrame)
+            {
+                Destroy(bookTwo);
+                Debug.Log("This is working");
+                player.GetComponent<Reading>().setBookTwoTrue();
             }
             
         }

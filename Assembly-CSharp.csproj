@@ -118,6 +118,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\Flooded_Grounds\PostProcessing\Runtime\Components\ScreenSpaceReflectionComponent.cs" />
     <Compile Include="Assets\AN Interactive Physical Door Pack\Scripts\AN_DoorKey.cs" />
+    <Compile Include="Assets\Scripts\PuzzleTwo.cs" />
     <Compile Include="Assets\Flooded_Grounds\PostProcessing\Runtime\Models\EyeAdaptationModel.cs" />
     <Compile Include="Assets\Flooded_Grounds\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />

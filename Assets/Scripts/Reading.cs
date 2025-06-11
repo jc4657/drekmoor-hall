@@ -27,7 +27,13 @@ public class Reading : MonoBehaviour
     void Update()
     {
         if (Keyboard.current.bKey.wasPressedThisFrame)
-            if (bookOne)
+            if (bookTwo)
+            {
+                bookOneUI.SetActive(active);
+                readingRN.SetActive(active);
+                active = !active;
+            }
+            else if (bookOne)
             {
                 bookOneUI.SetActive(active);
                 readingRN.SetActive(active);
