@@ -27,7 +27,7 @@ public class TempEnemy : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         seen = false;
-        timer = 60.0f;
+        timer = 7000.0f;
         currentState = state.idle;
         idleTimer = 240;
         x = Random.Range(transform.position.x + 5, transform.position.x - 5);
@@ -46,7 +46,7 @@ public class TempEnemy : MonoBehaviour
         switch (currentState)
         {
             case state.idle:
-                animator.SetTrigger("Idle");
+                animator.SetTrigger("Chase");
                
                 idleTimer--;
                 agent.SetDestination(randDest);
@@ -85,7 +85,7 @@ public class TempEnemy : MonoBehaviour
         //if ((pos - playerPos).magnitude <= 15)
         if (((view <= -90 || view >= 90) && range.magnitude <= 5) || ((view <= -45 || view >= 45) && !Physics.Raycast(ray, range.magnitude - 1)) || isReading.activeInHierarchy) //((view <= -90 || view >= 90) && range.magnitude <= 15) || 
         {
-            timer = 1200.0f;
+            timer = 7000.0f;
             seen = true;
         }
         else if ((pos - playerPos).magnitude > 15 && (pos - playerPos).magnitude <= 70)

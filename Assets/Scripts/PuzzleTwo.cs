@@ -14,7 +14,7 @@ public class PuzzleTwo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (leverOne.GetComponent<AN_Button>().GetPosition() && leverTwo.GetComponent<AN_Button>().GetPosition() && leverThree.GetComponent<AN_Button>().GetPosition() && (!leverFour.GetComponent<AN_Button>().GetPosition()))
+        if (leverOne.GetComponent<AN_Button>().GetPosition() && leverTwo.GetComponent<AN_Button>().GetPosition() && leverFour.GetComponent<AN_Button>().GetPosition() && (!leverThree.GetComponent<AN_Button>().GetPosition()))
         {
             Destroy(gameObject);
         }

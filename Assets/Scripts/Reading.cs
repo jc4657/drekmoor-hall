@@ -14,6 +14,10 @@ public class Reading : MonoBehaviour
     private bool bookThree;
     private bool active;
     public GameObject bookOneUI;
+
+    public GameObject bookTwoUI;
+
+    public GameObject bookThreeUI;
     public GameObject readingRN;
     void Start()
     {
@@ -27,9 +31,15 @@ public class Reading : MonoBehaviour
     void Update()
     {
         if (Keyboard.current.bKey.wasPressedThisFrame)
-            if (bookTwo)
+            if (bookThree)
             {
-                bookOneUI.SetActive(active);
+                bookThreeUI.SetActive(active);
+                readingRN.SetActive(active);
+                active = !active;
+            }
+            else if (bookTwo)
+            {
+                bookTwoUI.SetActive(active);
                 readingRN.SetActive(active);
                 active = !active;
             }

@@ -15,12 +15,18 @@ public class MySceneManager : MonoBehaviour
         SceneManager.LoadScene("GameScene");
     }
 
+    public static void LoadWin()
+    {
+        Time.timeScale = 0f;
+        SceneManager.LoadScene("TestPass");
+    }
+
     public static void QuitGame()
     {
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-        #else
+#else
             Application.Quit();
-        #endif
+#endif
     }
 }

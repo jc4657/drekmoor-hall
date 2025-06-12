@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+//using System.Numerics;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,7 +14,10 @@ public class GameManager : MonoBehaviour
 
     public GameObject bookOne;
     public GameObject bookTwo;
+    public GameObject bookThree;
     public Image image;
+
+    public GameObject WinPad;
 
     public GameObject hallucinationOne;
     public GameObject hallucinationTwo;
@@ -53,7 +57,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("We're here");
+            //Debug.Log("We're here");
             hall.SetActive(false);
             hallucinationOne.SetActive(false);
             hallucinationTwo.SetActive(false);
@@ -65,6 +69,8 @@ public class GameManager : MonoBehaviour
         Vector3 playerPos = player.transform.position;
         Vector3 bookOnePos = bookOne.transform.position;
         Vector3 bookTwoPos = bookTwo.transform.position;
+        Vector3 bookThreePos = bookThree.transform.position;
+        Vector3 winPos = WinPad.transform.position;
         if ((pos - playerPos).magnitude <= 10)
         {
             dangerUI.SetActive(true);
@@ -74,27 +80,59 @@ public class GameManager : MonoBehaviour
             dangerUI.SetActive(false);
         }
 
-        if ((playerPos - bookOnePos).magnitude <= 5)
+        if ((playerPos - winPos).magnitude <= 3)
+        {
+            Debug.Log("We WON");
+            MySceneManager.LoadWin();
+        }
+
+        if (bookThree != null)
+        { 
+        if ((playerPos - bookThreePos).magnitude <= 5)
         {
             Debug.Log("We reach here");
             if (Keyboard.current.zKey.wasPressedThisFrame)
             {
-                Destroy(bookOne);
+                //Destroy(bookThree);
+                bookThree.SetActive(false);
                 Debug.Log("This is working");
-                player.GetComponent<Reading>().setBookOneTrue();
+                //bookThree = null;
+                player.GetComponent<Reading>().setBookThreeTrue();
             }
 
         }
-        if ((playerPos - bookTwoPos).magnitude <= 5) 
+    }
+        if (bookTwo != null)
         {
-            Debug.Log("We reach here");
-            if (Keyboard.current.zKey.wasPressedThisFrame)
+            if ((playerPos - bookTwoPos).magnitude <= 5)
             {
-                Destroy(bookTwo);
-                Debug.Log("This is working");
-                player.GetComponent<Reading>().setBookTwoTrue();
+                Debug.Log("We reach here");
+                if (Keyboard.current.zKey.wasPressedThisFrame)
+                {
+                    //Destroy(bookTwo);
+                    bookTwo.SetActive(false);
+                    Debug.Log("This is working");
+                    //bookTwo = null;
+                    player.GetComponent<Reading>().setBookTwoTrue();
+                }
+
             }
-            
+        }
+        if (bookOne != null)
+        {
+            if ((playerPos - bookOnePos).magnitude <= 5)
+            {
+                //Debug.Log("We reach here");
+                if (Keyboard.current.zKey.wasPressedThisFrame)
+                {
+                    //Destroy(bookOne);
+                    bookOne.SetActive(false);
+                    //Debug.Log("This is working");
+                    //bookOne = null;
+                    player.GetComponent<Reading>().setBookOneTrue();
+                }
+
+            }
         }
     }
 }

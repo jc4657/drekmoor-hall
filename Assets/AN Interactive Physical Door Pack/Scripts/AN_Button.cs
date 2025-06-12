@@ -56,7 +56,7 @@ public class AN_Button : MonoBehaviour
     {
         if (!Locked)
         {
-            if ((player.transform.position - transform.position).magnitude <= 3)
+            if ((player.transform.position - transform.position).magnitude <= 1.5)
             {
                 if (Keyboard.current.eKey.wasPressedThisFrame && !isValve) // 1.lever and 2.button DoorObject != null && DoorObject.Remote && NearView()
                 {
